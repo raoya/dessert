@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HexHotel</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0px;
+            text-decoration: none;
+        }
+
+        body {
+            left: 0px;
+            top: 0px;
+            width: 1200px;
+        }
+
+        .header {
+            background-color: #ffffff;
+            width: 1113px;
+            position: relative;
+            top: 0px;
+            left: 16%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0px;
+            z-index: 3;
+            box-shadow: 0px 3px 26px -10px rgba(0, 0, 0, 0.75);
+            word-spacing: 10px;
+        }
+
+        .head-column {
+            height: 60px;
+            width: 240px;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #A8B1B9;
+        }
+
+        .head-column:hover {
+            cursor: pointer;
+            background-color: #E3E6E9;
+        }
+
+        .column {
+            height: 60px;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            color: #A8B1B9;
+            border-bottom: 2px solid #BBC3CB;
+        }
+
+        .header img {
+            height: 60px;
+            width: 60px;
+            padding: 0px;
+        }
+
+        .head-column img {
+            height: 25px;
+            width: auto;
+        }
+
+        .column img {
+            height: 25px;
+            width: auto;
+        }
+
+        .room-option {
+            background-color: #ffffff;
+            border-top: 2px solid #BBC3CB;
+            border-left: 2px solid #BBC3CB;
+            border-right: 2px solid #BBC3CB;
+            width: 240px;
+            position: absolute;
+            top: 60px;
+            left: 1065px;
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 0px;
+            z-index: 3;
+        }
+
+        .reserve {
+            background-color: #569DC3;
+            color: #ffffff;
+        }
+
+        .check-option {
+            background-color: #ffffff;
+            border-top: 2px solid #BBC3CB;
+            border-left: 2px solid #BBC3CB;
+            border-right: 2px solid #BBC3CB;
+            width: 360px;
+            position: absolute;
+            top: 300px;
+            left: 950px;
+            padding: 0px;
+            z-index: 2;
+        }
+
+        #total{
+            height: auto;
+        }
+
+        .column:hover {
+            cursor: pointer;
+            background-color: #E3E6E9;
+        }
+
+        .main {
+            position: relative;
+            height: 500px;
+            width: 750px;
+            overflow: hidden;
+            margin: 100px 50px 0px 0px;
+            left: 20%;
+        }
+
+        .main img {
+            width: auto;
+            height: 600px;
+            margin: -200px 0px 0px 0px;
+        }
+
+        .room-photo img {
+            width: 180px;
+            height: 120px;
+        }
+
+        #title {
+            position: absolute;
+            /* transform: rotate(90deg); */
+            top: 0px;
+            left: 0px;
+            background-color: #ffffff;
+            font-size: 30px;
+        }
+
+        .main-text {
+            position: relative;
+            top: -420px;
+            left: 100px;
+            text-align: end;
+        }
+
+        .main-text b {
+            font-size: 25px;
+        }
+
+        .room-photo {
+            position: relative;
+            left: 20%;
+            top: -90px;
+        }
+
+        .introduce {
+            position: relative;
+            left: 20%;
+            top: -60px;
+        }
+
+        .icon {
+            position: relative;
+            left: 20%;
+            height: 200px;
+            width: 600px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+
+        .date {
+            position: relative;
+            left: 20%;
+        }
+
+        .date input {
+            width: 200px;
+        }
+
+        .footer img {
+            position: relative;
+            left: 19%;
+            width: 1000px;
+            height: auto;
+        }
+
+        .active {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <img src="./logo.PNG" alt="">
+        <div class="head-column" id="roomButton">
+            <img src="./icon/bed.png" alt="">
+            <span>ROOM STYLE ▼</span>
+        </div>
+    </div>
+
+    <div class="check-option">
+        <div class="column">
+            <img src="./icon/date.png" alt="">
+            <span>CHECK-IN▼</span>
+            <input type="date" id="checkInTime" onchange="show()" name="time">
+        </div>
+        <div class="column">
+            <img src="./icon/date.png" alt="">
+            <span>CHECK-OUT▼</span>
+            <input type="date" id="checkOutTime" onchange="show()" name="time">
+        </div>
+        <div class="column" id="total" style="display: none;">
+        </div>
+        <div class="column reserve" id="reserve">
+            <span>Reserve Now</span>
+        </div>
+    </div>
+
+    <div class="room-option">
+    </div>
+
+    <div class="main">
+    </div>
+
+    <div class="main-text">
+    </div>
+
+    <div class="room-photo">
+    </div>
+
+    <div class="introduce">
+        <h2>Description</h2></br>
+        <span>1 Guest · 1 Bed (Small Double) · 1 Private Bath · 22 m2</span></br>
+        </br>
+        <span>Deluxe Single Room is only reserved for one guest. There is a bedroom</br>
+            with a small double size bed and a private bathroom. Everything you </br>
+            need prepared for you: sheets and blankets, towels, soap and shampoo,</br>
+            hairdryer are provided. In the room there is AC and of course WiFi.</span></br>
+        </br>
+        <span>Check-in is from 3pm to 7pm</span></br>
+        <span>Check-out is before 11am</span>
+        </br>
+        </br>
+        <h2>Amenities</h2>
+    </div>
+
+    <div class="icon">
+        <div>
+            <img src="./icon/wifi.png" alt="">
+            <span>Wi-Fi</span>
+        </div>
+
+        <div>
+            <img src="./icon/breakfast.png" alt="">
+            <span>Breakfast</span>
+        </div>
+
+        <div>
+            <img src="./icon/bar.png" alt="">
+            <span>Mini Mar</span>
+        </div>
+
+        <div>
+            <img src="./icon/room_service.png" alt="">
+            <span>Room Service</span>
+        </div>
+
+        <div>
+            <img src="./icon/tv.png" alt="">
+            <span>Television</span>
+        </div>
+
+        <div>
+            <img src="./icon/air.png" alt="">
+            <span>Air Conditionner</span>
+        </div>
+
+        <div>
+            <img src="./icon/refrigerator.png" alt="">
+            <span>Refrigerator</span>
+        </div>
+
+        <div style="opacity: 0.5;">
+            <img src="./icon/sofa.png" alt="">
+            <span>Sofa</span>
+        </div>
+
+        <div style="opacity: 0.5;">
+            <img src="./icon/view.png" alt="">
+            <span>Great View</span>
+        </div>
+
+        <div>
+            <img src="./icon/smoke_free.png" alt="">
+            <span>Smoke Free</span>
+        </div>
+
+        <div style="opacity: 0.5;">
+            <img src="./icon/child.png" alt="">
+            <span>Child-Friendly</span>
+        </div>
+
+        <div>
+            <img src="./icon/pet.png" alt="">
+            <span>Pet-Friendly</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <img src="./footer.PNG" alt="">
+    </div>
+
+
+    <script>
+        //點擊Room按鈕顯示出房型選單
+        let roomButton = document.querySelector("#roomButton");
+        let roomOption = document.querySelector(".room-option");
+        roomButton.addEventListener("click", function () {
+            document.querySelector(".room-option").classList.toggle("active");
+            if (roomOption.classList.contains("active")) {
+                roomButton.style.color = "#FFFFFF";
+                roomButton.style.backgroundColor = "#2D3643"
+                return;
+            };
+            roomButton.style.color = "#A8B1B9";
+            roomButton.style.backgroundColor = "#ffffff";
+        });
+
+        //透過各房ID取得各房單一細節
+        function getRoom(id) {
+            const xhr = new XMLHttpRequest;
+            xhr.open("GET", `https://challenge.thef2e.com/api/thef2e2019/stage6/room/${id}`);
+            xhr.setRequestHeader("Authorization", "Bearer tyu3t5liFuXaJFlcvyItMdJywXB2SqTaf4tZgJoE6FaHqDXMogGtzXeAuv8f");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        const room = response.room[0];
+
+                        const roomDomString = `
+                            <h3 id="title"><i>${room.name}</i></h3>
+                            <img src="${room.imageUrl[0]}" alt="">
+                        `;
+                        const main = document.querySelector(".main");
+                        main.innerHTML = `${roomDomString}`;
+
+                        const text = `
+                            <span><b>$ ${room.normalDayPrice} NTD</b> / night</span></br>
+                            <span>holiday price - $ ${room.holidayPrice} NTD / night</span>
+                        `
+                        const mainText = document.querySelector(".main-text");
+                        mainText.innerHTML = `${text}`;
+
+                        let photo = "";
+                        for (let i = 0; i < room.imageUrl.length; i++) {
+                            const imageDom = `<img src="${room.imageUrl[i]}" alt="">`;
+                            photo = photo + imageDom;
+                        }
+                        const roomPhoto = document.querySelector(".room-photo");
+                        roomPhoto.innerHTML = `${photo}`;
+                    }
+                }
+
+            };
+
+            xhr.send();
+        }
+
+        let urlParams = new URLSearchParams(window.location.search);
+        let roomId = urlParams.get("id");
+        getRoom(roomId);
+   
+        //入退房日期
+        function show() {
+            const checkInTime = document.querySelector("#checkInTime").value;
+            const checkOutTime = document.querySelector("#checkOutTime").value;
+
+            // const date = new Date(checkInTime);
+            // const date2 = new Date(checkOutTime);
+
+            // if(date.getDay()===6){
+            // console.log(date.getDay());
+
+            // }
+
+            // const night =Date.parse(checkOutTime.value) - Date.parse(checkInTime.value);
+            // const dayVlaue = night / (1000*60*60*24);
+            // console.log(dayVlaue);
+
+            const total = `
+                <span>CheckInTime: ${checkInTime} </span></br>
+                <span>CheckOutTime: ${checkOutTime} </span></br>
+                <span>Total</span>  
+            `
+            const totalDate = document.querySelector("#total");
+            totalDate.innerHTML = total;
+            totalDate.style.display = "block";
+
+
+            const reserve = document.querySelector("#reserve");
+            reserve.innerHTML = `
+                <a href="./index4.html?date=${checkInTime}&date2=${checkOutTime}">
+                    <span>Reserve Now</span>
+                </a>
+            `
+        }
+
+
+
+        //Room選單
+        function getRoomList() {
+            const xhr = new XMLHttpRequest;
+            xhr.open("GET", "https://challenge.thef2e.com/api/thef2e2019/stage6/rooms");
+            xhr.setRequestHeader("Authorization", "Bearer tyu3t5liFuXaJFlcvyItMdJywXB2SqTaf4tZgJoE6FaHqDXMogGtzXeAuv8f");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        const rooms = response.items;
+                        createRoomName(rooms);
+                    }
+                }
+            };
+
+            xhr.send();
+        }
+
+        getRoomList();
+
+        //在Room選單裡建立各房名稱
+        function createRoomName(rooms) {
+            for (let i = 0; i < rooms.length; i++) {
+                const room = rooms[i];
+                const roomName = `
+                    <div class="column" data-roomid="${room.id}">
+                        <span>${room.name}</span>
+                    </div>
+                `;
+                const roomOption = document.querySelector(".room-option");
+                roomOption.insertAdjacentHTML("beforeend", roomName);
+            }
+        }
+
+        //點擊RoomStyle選單選項建立各房單一細節
+        roomOption.addEventListener("click", function (event) {
+            if (event.target.closest(".column")) {
+                getRoom(event.target.closest(".column").dataset.roomid);
+            }
+        });
+
+
+        // let urlParams = new URLSearchParams(window.location.search);
+        // console.log(urlParams.has('q')); // true
+        // console.log(urlParams.get('txt')); // "abc"
+        // console.log(urlParams.getAll('action')); // ["abc"]
+        // console.log(urlParams.toString()); // "q=1234&txt=abc"
+        // console.log(urlParams.append('page', '1')); // "q=1234&txt=abc&page=1"
+
+
+
+    </script>
+
+
+</body>
+
+</html>
